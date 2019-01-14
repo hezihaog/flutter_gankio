@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gankio/Api.dart';
 import 'package:flutter_gankio/common/loading_view.dart';
 import 'package:flutter_gankio/constant/gank_constant.dart';
-import 'package:flutter_gankio/model/ganhuo.dart';
+import 'package:flutter_gankio/model/gank_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -15,7 +15,7 @@ class WelfarePage extends StatefulWidget {
 }
 
 class WelfarePageState extends State<WelfarePage> {
-  List<GanHuo> mItemModels = new List();
+  List<Result> mItemModels = new List();
   int mCurrentPageIndex = DEFAULT_PAGE_INDEX;
   CancelToken _token = new CancelToken();
   ScrollController _scrollController;
@@ -96,7 +96,7 @@ class WelfarePageState extends State<WelfarePage> {
     Dio dio = new Dio();
     String url = "${Api.BASE_URL}/data/福利/10/$mCurrentPageIndex";
     Response response = await dio.get(url, cancelToken: _token);
-    GanHuos model = GanHuos.fromJson(response.data);
+    GankModel model = GankModel.fromJson(response.data);
     mItemModels.addAll(model.results);
     PageStorage.of(context)
         .writeState(context, mItemModels, identifier: _dataIdentifier);
@@ -125,7 +125,7 @@ class WelfarePageState extends State<WelfarePage> {
     }
   }
 
-  Widget _buildImageItem(GanHuo model) {
+  Widget _buildImageItem(Result model) {
     return new GestureDetector(
       onTap: () {},
       child: new Hero(

@@ -1,22 +1,22 @@
-part of 'ganhuo.dart';
+part of 'gank_model.dart';
 
-GanHuos _$GanHuosFromJson(Map<String, dynamic> json) => GanHuos(
+GankModel _$GanHuosFromJson(Map<String, dynamic> json) => GankModel(
     json['error'] as bool,
     (json['results'] as List)
         ?.map((e) =>
-            e == null ? null : GanHuo.formJson(e as Map<String, dynamic>))
+            e == null ? null : Result.formJson(e as Map<String, dynamic>))
         ?.toList());
 
-abstract class _GanHuosSerializerMiXin {
+abstract class _GankModelSerializerMiXin {
   bool get error;
 
-  List<GanHuo> get results;
+  List<Result> get results;
 
   Map<String, dynamic> toJson() =>
       <String, dynamic>{'error': error, 'results': results};
 }
 
-GanHuo _$GanHuoFormJson(Map<String, dynamic> json) => GanHuo(
+Result _$GankModelFormJson(Map<String, dynamic> json) => Result(
     json['_id'] as String,
     json['createAt'] as String,
     json['desc'] as String,
@@ -29,7 +29,7 @@ GanHuo _$GanHuoFormJson(Map<String, dynamic> json) => GanHuo(
     json['source'] as String,
     json['used'] as bool);
 
-abstract class _$GanHuoSerializerMiXin {
+abstract class _$GankModelSerializerMiXin {
   String get _id;
 
   String get createdAt;
